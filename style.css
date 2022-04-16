@@ -1,0 +1,93 @@
+:root {
+  --color-pink: rgb(251, 203, 210);
+  --color-blue: rgb(196, 226, 236);
+}
+body {
+  background-color: gray;
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+#box {
+  width: 70vmin;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+header {
+  height: 60px;
+  background-color: var(--color-blue);
+  display: flex;
+  align-items: center;
+  padding-left: 23px;
+  font-size: 20px;
+  font-weight: 900;
+}
+form {
+  height: 440px;
+}
+ul {
+  height: 340px;
+  background-color: whitesmoke;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow-y: scroll;
+}
+ul li {
+  padding: 10px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px dotted var(--color-blue);
+}
+li input,
+li button {
+  width: 20px;
+  height: 20px;
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  background-color: var(--color-pink);
+  font-weight: 700;
+}
+#inputText {
+  height: 40px;
+  width: 100%;
+  text-align: center;
+  padding: 0;
+  border: 0;
+}
+#inputText::placeholder {
+  color: var(--color-blue);
+}
+#footer {
+  height: 60px;
+  background-color: var(--color-pink);
+  display: flex;
+  justify-content: center;
+}
+#footer input {
+  height: 30px;
+  width: 30px;
+  margin-top: 15px;
+  background-color: var(--color-blue);
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 900;
+  color: var(--color-pink);
+  padding: 0;
+}
