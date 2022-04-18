@@ -1,21 +1,39 @@
 const form = document.querySelector('form');
-const lists = document.querySelector('form ul');
-const submit = document.querySelector('#footer input');
+const lists = document.querySelector(' ul');
+const submitBtn = document.querySelector('#footer input');
 const inputList = document.querySelector('#inputText');
-const deleteBtn = document.querySelector('li .deleteBtn');
+const deleteBtn = document.querySelector('.deleteBtn');
 
-form.addEventListener('submit', (event) => {
+function onSubmit(event) {
   event.preventDefault();
-  const list = inputList.value;
-  lists.innerHTML += `
-  <li>
-    <input type="checkbox" />
-    <span>${list}</span>
-    <button class="deleteBtn">✖</button>
-  </li>`;
+  const newList = inputList.value;
+  inputList.value = '';
+  addList(newList);
+}
 
-  deleteBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    console.log(e.target.parentNode);
-  });
-});
+function addList(newList) {
+  const li = document.createElement('li');
+  const checkbox = document.createElement('input');
+  checkbox.type = 'checkbox';
+  checkbox.addEventListener('change', onCheck);
+  const span = document.createElement('span');
+  span.textContent = newList;
+  const deleteBtn = document.createElement('button');
+  deleteBtn.textContent = '✖';
+  deleteBtn.addEventListener('click', onRemove);
+  li.appendChild(checkbox);
+  li.appendChild(span);
+  li.appendChild(deleteBtn);
+  lists.appendChild(li);
+}
+function onRemove(event) {
+  const removeList = event.target.parentElement;
+  removeList.remove();
+}
+function onCheck(event) {
+  const checkList = event.target.parentElement;
+  event.target.checked
+    ? (checkList.style.color = 'rgb(209, 209, 209)')
+    : (checkList.style.color = 'black');
+}
+form.addEventListener('submit', onSubmit);
