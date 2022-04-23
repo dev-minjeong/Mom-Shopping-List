@@ -1,3 +1,13 @@
+/**
+ * 전체 삭제 기능
+ * 추가 아이템 스크롤링
+ * 스크롤바 디자인
+ * 가격 합산 기능
+ * 저장 기능(localstorage)
+ * 체크한 것 아래로 보내기
+ * 우선순위 필터링 및 위로 보내고, 구분된 디자인
+ */
+
 const form = document.querySelector('form');
 const lists = document.querySelector(' ul');
 const submitBtn = document.querySelector('#footer input');
