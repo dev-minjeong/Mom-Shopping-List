@@ -6,39 +6,43 @@
  * 저장 기능(localstorage)
  * 체크한 것 아래로 보내기
  * 우선순위 필터링 및 위로 보내고, 구분된 디자인
+ * 코드 효율적으로 개선 ⭕
  */
 
+const lists = document.querySelector('.lists');
 const form = document.querySelector('form');
-const lists = document.querySelector(' ul');
-const submitBtn = document.querySelector('#footer input');
-const inputList = document.querySelector('#inputText');
-const deleteBtn = document.querySelector('.deleteBtn');
+const inputText = document.querySelector('.input-text');
+const submitBtn = document.querySelector('.submit-btn');
 
 function onSubmit(event) {
   event.preventDefault();
-  const newList = inputList.value;
-  inputList.value = '';
-  addList(newList);
+  const newList = inputText.value;
+  if (!newList) {
+    inputText.focus();
+    return;
+  }
+  const list = addList(newList);
+  lists.appendChild(list);
+  inputText.value = '';
+  inputText.focus();
 }
 
+let id = 1;
 function addList(newList) {
-  const li = document.createElement('li');
-  const checkbox = document.createElement('input');
-  checkbox.type = 'checkbox';
-  checkbox.addEventListener('change', onCheck);
-  const span = document.createElement('span');
-  span.textContent = newList;
-  const deleteBtn = document.createElement('button');
-  deleteBtn.textContent = '✖';
-  deleteBtn.addEventListener('click', onRemove);
-  li.appendChild(checkbox);
-  li.appendChild(span);
-  li.appendChild(deleteBtn);
-  lists.appendChild(li);
-}
-function onRemove(event) {
-  const removeList = event.target.parentElement;
-  removeList.remove();
+  const list = document.createElement('li');
+  list.setAttribute('class', 'list-row');
+  list.setAttribute('data-id', id);
+  list.innerHTML = `
+    <div class="list">
+      <button class="check-btn">✔</button>
+      <span class="span-text">${newList}</span>
+      <button class="remove-btn">
+        <i class="fa-solid fa-xmark" data-id="${id}"></i>
+      </button>
+    </div>
+  `;
+  id++;
+  return list;
 }
 function onCheck(event) {
   const checkList = event.target.parentElement;
@@ -47,3 +51,13 @@ function onCheck(event) {
     : (checkList.style.color = 'black');
 }
 form.addEventListener('submit', onSubmit);
+lists.addEventListener('click', (event) => {
+  const dataId = event.target.dataset.id;
+  if (dataId) {
+    const removeList = document.querySelector(`.list-row[data-id="${dataId}"]`);
+    removeList.remove();
+  } else {
+    const checkList = event.target.parentElement;
+    checkList.classList.toggle('checked');
+  }
+});

@@ -5,22 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mom's Shopping</title>
     <link rel="stylesheet" href="style.css" />
+    <script src="app.js" defer></script>
+    <script
+      src="https://kit.fontawesome.com/240330c6ff.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
-    <div id="box">
+    <section id="box">
       <header>Mom's Shopping List</header>
-      <ul></ul>
-      <form>
-        <input
-          id="inputText"
-          type="text"
-          placeholder="Input Your Shopping List!"
-        />
-        <div id="footer">
-          <input type="submit" value="+" />
-        </div>
-      </form>
-    </div>
-    <script src="app.js"></script>
+      <ul class="lists">
+        <li class="list-row" data-id="0">
+          <div class="list">
+            <button class="check-btn">✔</button>
+            <span class="span-text">라면</span>
+            <button class="remove-btn" data-id="0">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+        </li>
+      </ul>
+      <footer>
+        <form>
+          <input
+            class="input-text"
+            type="text"
+            placeholder="Input Your Shopping List!"
+          />
+          <div class="submit-box">
+            <input type="submit" class="submit-btn" value="+" />
+          </div>
+        </form>
+      </footer>
+    </section>
   </body>
 </html>
