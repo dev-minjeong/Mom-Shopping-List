@@ -139,6 +139,7 @@ footer {
   text-align: center;
   cursor: auto;
   font-size: 20px;
+  font-weight: 600;
 }
 .input-text::placeholder {
   color: var(--color-blue);

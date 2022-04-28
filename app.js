@@ -3,8 +3,8 @@
  * 추가 아이템 스크롤링 ⭕
  * 스크롤바 디자인 ⭕
  * 가격 합산 기능
- * 저장 기능(localstorage)
- * 체크한 것 아래로 보내기 ⭕
+ * 저장 기능(localstorage) ⭕
+ * 체크한 것 아래로 보내기 ⭕, 일단 보류(체크 순서 저장 문제)
  * 우선순위 필터링 및 위로 보내고, 구분된 디자인
  * 코드 효율적으로 개선 ⭕
  */
@@ -32,27 +32,28 @@ function removeData(target) {
   dataArr = cleanList;
   saveData();
 }
-/* 체크 상태 localStorage 수정 */
-function checkData(target) {
-  const getData = JSON.parse(localStorage.getItem('checked'));
-  if (target.className === 'checked') {
-    console.log(getData);
-    // getData.check = '1';
-  } else {
-    console.log(getData);
-    // getData.check = '0';
-  }
-
-  // if (dataObj.check === '0') {
-  //   list.childNodes[1].remove('checked');
-  // } else if (dataObj.check === '1') {
-  //   list.childNodes[1].add('checked');
-  // }
+function addCheck(data) {
+  checkedArr.push(data);
+  saveData();
 }
-
+/* 체크 상태 localStorage 수정 */
+function checkData() {
+  const listAll = lists.childNodes;
+  let tempArr = [];
+  for (let i = 0; i < listAll.length; i++) {
+    if (listAll[i].childNodes[1].className === 'checked') {
+      tempArr.push('1');
+    } else {
+      tempArr.push('0');
+    }
+  }
+  checkedArr = tempArr;
+  saveData();
+  // localStorage.setItem('checked', JSON.stringify(checkedArr));
+}
 /* 추가할 리스트 */
 let id = 0;
-function addList(text, check) {
+function addList(text) {
   const list = document.createElement('li');
   list.setAttribute('class', 'list-row');
   list.setAttribute('data-id', id);
@@ -74,7 +75,6 @@ function addList(text, check) {
     dataId: id,
   };
   dataArr.push(dataObj);
-  checkedArr.push(check);
   saveData();
 
   id++;
@@ -88,7 +88,8 @@ function onSubmit(event) {
     inputText.focus();
     return;
   }
-  addList(newList, 0);
+  addList(newList);
+  addCheck('0');
   // 추가 후 상태
   inputText.value = '';
   inputText.focus();
@@ -104,27 +105,40 @@ function listBtnClick(event) {
     const removeList = document.querySelector(`.list-row[data-id="${dataId}"]`);
     removeList.remove();
     removeData(removeList);
+    checkData();
   } else if (event.target.id === 'list') {
     // 나머지 부분 클릭
     checkList.classList.toggle('checked');
-    checkList.parentElement.remove();
-    lists.appendChild(checkList.parentElement);
-    checkData(checkList);
+    // checkList.parentElement.remove();
+    // lists.appendChild(checkList.parentElement);
+    checkData();
   } else if (targetClass === 'check-btn' || targetClass === 'span-text') {
     checkList.parentElement.classList.toggle('checked');
-    checkList.parentElement.parentElement.remove();
-    lists.appendChild(checkList.parentElement.parentElement);
-    checkData(checkList.parentElement);
+    // checkList.parentElement.parentElement.remove();
+    // lists.appendChild(checkList.parentElement.parentElement);
+    checkData();
   }
 }
 /* 리스트 로드 */
 function loadList() {
   const loadedList = localStorage.getItem('data');
-  if (loadedList != null) {
+  const loadedCheck = localStorage.getItem('checked');
+  if (loadedList != null && loadedCheck != null) {
     const parseList = JSON.parse(loadedList);
+    const parseCheck = JSON.parse(loadedCheck);
     parseList.forEach((list) => {
       addList(list.text);
     });
+    parseCheck.forEach((chk) => {
+      addCheck(chk);
+    });
+  }
+  for (let i = 0; i < checkedArr.length; i++) {
+    if (checkedArr[i] === '1') {
+      lists.childNodes[i].childNodes[1].classList.add('checked');
+    } else {
+      lists.childNodes[i].childNodes[1].classList.remove('checked');
+    }
   }
 }
 
@@ -133,6 +147,8 @@ function init() {
   loadList();
   /* submit 이벤트 실행 */
   form.addEventListener('submit', onSubmit);
+  /* 리스트 하위 버튼 클릭 */
+  lists.addEventListener('click', listBtnClick);
 }
 
 /* 전체 체크, 삭제 */
@@ -142,7 +158,7 @@ controlBtn.addEventListener('click', (event) => {
   if (targetClass === 'ckeck-all') {
     for (let i = 0; i < listAll.length; i++) {
       listAll[i].childNodes[1].classList.toggle('checked');
-      checkData(listAll[i].childNodes[1]);
+      checkData();
     }
   } else if (targetClass === 'remove-all') {
     lists.innerHTML = '';
@@ -151,8 +167,5 @@ controlBtn.addEventListener('click', (event) => {
     return;
   }
 });
-
-/* 리스트 하위 버튼 클릭 */
-lists.addEventListener('click', listBtnClick);
 
 init();
