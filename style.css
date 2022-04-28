@@ -35,7 +35,7 @@ header {
   border-radius: 20px 20px 0 0;
   text-align: left;
   display: flex;
-  font-weight: 900;
+  font-weight: 800;
 }
 header .logo {
   height: 14vh;
@@ -53,9 +53,12 @@ header .content {
 header span {
   display: flex;
   align-items: flex-end;
-  padding-bottom: 10px;
   font-size: 23px;
   height: 8vh;
+}
+header span strong {
+  font-weight: 900;
+  font-size: 25px;
 }
 .control-box {
   align-items: center;

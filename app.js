@@ -119,6 +119,39 @@ function listBtnClick(event) {
     checkData();
   }
 }
+
+/* 전체 체크, 삭제 */
+controlBtn.addEventListener('click', (event) => {
+  const targetClass = event.target.parentElement.className;
+  const listAll = lists.childNodes;
+  if (targetClass === 'ckeck-all') {
+    let checkedCount = 0;
+    // 몇개 체크됐는지 확인
+    listAll.forEach((arr) => {
+      arr.childNodes[1].className === 'checked' && checkedCount++;
+    });
+    // 모두 체크됐거나 안된 경우
+    if (checkedCount === 0 || checkedCount === listAll.length) {
+      listAll.forEach((arr) => {
+        arr.childNodes[1].classList.toggle('checked');
+        checkData();
+      });
+    }
+    // 몇개만 체크된 경우
+    else {
+      listAll.forEach((arr) => {
+        arr.childNodes[1].className = 'checked';
+        checkData();
+      });
+    }
+  } else if (targetClass === 'remove-all') {
+    lists.innerHTML = '';
+    localStorage.clear();
+  } else {
+    return;
+  }
+});
+
 /* 리스트 로드 */
 function loadList() {
   const loadedList = localStorage.getItem('data');
@@ -139,6 +172,7 @@ function loadList() {
     } else {
       lists.childNodes[i].childNodes[1].classList.remove('checked');
     }
+    lists.childNodes[0].scrollIntoView();
   }
 }
 
@@ -150,22 +184,5 @@ function init() {
   /* 리스트 하위 버튼 클릭 */
   lists.addEventListener('click', listBtnClick);
 }
-
-/* 전체 체크, 삭제 */
-controlBtn.addEventListener('click', (event) => {
-  const targetClass = event.target.parentElement.className;
-  const listAll = lists.childNodes;
-  if (targetClass === 'ckeck-all') {
-    for (let i = 0; i < listAll.length; i++) {
-      listAll[i].childNodes[1].classList.toggle('checked');
-      checkData();
-    }
-  } else if (targetClass === 'remove-all') {
-    lists.innerHTML = '';
-    localStorage.clear();
-  } else {
-    return;
-  }
-});
 
 init();
