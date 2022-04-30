@@ -36,19 +36,14 @@ header {
   text-align: left;
   display: flex;
   font-weight: 800;
+  justify-content: space-between;
 }
 header .logo {
   height: 14vh;
-  flex-grow: 1;
   padding: 20px 0 0 10px;
 }
 .logo img {
   height: 100%;
-}
-header .content {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 3;
 }
 header span {
   display: flex;
@@ -60,10 +55,13 @@ header span strong {
   font-weight: 900;
   font-size: 25px;
 }
-.control-box {
-  align-items: center;
+header .content {
   display: flex;
+  flex-direction: column;
   justify-content: end;
+}
+.control-box {
+  display: flex;
   height: 6vh;
 }
 .control-box button {
