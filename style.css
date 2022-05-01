@@ -46,6 +46,7 @@ header .logo {
   height: 100%;
 }
 header span {
+  color: aqua;
   display: flex;
   font-size: 23px;
   height: 8vh;
