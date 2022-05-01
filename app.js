@@ -7,8 +7,10 @@
  * 체크한 것 아래로 보내기 ⭕→ 일단 보류(체크 순서 저장 문제)
  * 우선순위 필터링 및 위로 보내고, 구분된 디자인
  * 코드 효율적으로 개선 ⭕
+ * 종류별로 입력 및 구분
  */
 
+const title = document.querySelector('header span');
 const lists = document.querySelector('.lists');
 const form = document.querySelector('form');
 const controlBtn = document.querySelector('.control-box');
@@ -173,6 +175,9 @@ function loadList() {
       lists.childNodes[i].childNodes[1].classList.remove('checked');
     }
     lists.childNodes[0].scrollIntoView();
+  }
+  if (window.innerWidth < 480) {
+    title.innerHTML = `박여사님의<br>장보기 목록❤`;
   }
 }
 

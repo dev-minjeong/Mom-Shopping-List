@@ -47,13 +47,11 @@ header .logo {
 }
 header span {
   display: flex;
-  align-items: flex-end;
   font-size: 23px;
   height: 8vh;
-}
-header span strong {
-  font-weight: 900;
-  font-size: 25px;
+  margin: auto;
+  text-align: center;
+  align-items: center;
 }
 header .content {
   display: flex;
@@ -110,9 +108,9 @@ ul::-webkit-scrollbar-track {
 }
 .check-btn,
 .remove-btn {
-  width: 80px;
   height: 100%;
   font-weight: 900;
+  flex-basis: 17%;
 }
 .check-btn {
   background-color: var(--color-pink);
@@ -137,9 +135,11 @@ ul::-webkit-scrollbar-track {
   font-size: 27px;
 }
 #list .span-text {
+  flex-basis: 66%;
   font-weight: 600;
   cursor: pointer;
   font-size: 18px;
+  padding: 0 20px;
 }
 footer {
   width: 100%;
@@ -214,7 +214,7 @@ footer {
     margin-top: 1vh;
   }
 } /* 모바일 가로, 모바일 세로 (해상도 480px ~ 767px)*/
-@media all and (max-width: 767px) {
+@media all and (min-width: 480px) and (max-width: 767px) {
   #box {
     width: 100%;
     margin: 0;
@@ -230,6 +230,36 @@ footer {
     height: 18vh;
   }
 
+  .check-btn,
+  .remove-btn {
+    width: 85px;
+  }
+  .input-text {
+    height: 8vh;
+  }
+  .submit-box {
+    height: 10vh;
+  }
+  .submit-box .submit-btn {
+    margin-top: 1vh;
+  }
+}
+@media all and (max-width: 479px) {
+  #box {
+    width: 100%;
+    margin: 0;
+    height: 100%;
+  }
+  header {
+    height: 14vh;
+    padding: 0 17px;
+  }
+  ul {
+    height: 68vh;
+  }
+  footer {
+    height: 18vh;
+  }
   .check-btn,
   .remove-btn {
     width: 85px;
