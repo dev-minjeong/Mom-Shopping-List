@@ -10,6 +10,7 @@
  * 종류별로 입력 및 구분
  */
 
+const box = document.querySelector('#box');
 const title = document.querySelector('header span');
 const lists = document.querySelector('.lists');
 const form = document.querySelector('form');
@@ -183,6 +184,9 @@ function loadList() {
 
 /* 페이지 새로고침 */
 function init() {
+  if (window.innerWidth < 768) {
+    box.style.height = `${window.innerHeight}px`;
+  }
   loadList();
   /* submit 이벤트 실행 */
   form.addEventListener('submit', onSubmit);
@@ -191,3 +195,5 @@ function init() {
 }
 
 init();
+console.log(window.innerHeight);
+console.log(box.style.height);
