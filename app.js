@@ -177,14 +177,11 @@ function loadList() {
     }
     lists.childNodes[0].scrollIntoView();
   }
-  if (window.innerWidth < 480) {
-    title.innerHTML = `박여사님의<br>장보기 목록❤`;
-  }
 }
 
 /* 페이지 새로고침 */
 function init() {
-  if (window.innerWidth < 768) {
+  if (window.innerWidth < 550) {
     box.style.height = `${window.innerHeight}px`;
   }
   loadList();

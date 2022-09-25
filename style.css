@@ -20,11 +20,14 @@ input {
 body {
   background-color: rgb(211, 211, 220);
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 #box {
-  width: 600px;
-  height: 70vh;
-  margin: auto;
+  height: 90vh;
+  aspect-ratio: 2 / 3;
+  margin-top: 20px;
   background-color: aliceblue;
   border-radius: 20px;
   margin-top: 30px;
@@ -41,24 +44,26 @@ header {
   font-weight: 800;
   justify-content: space-between;
   flex-grow: 2;
+  height: 11vh;
 }
-header .logo {
+header .logo-img {
   padding: 20px 0 0 10px;
+  flex-basis: 20%;
 }
-.logo img {
-  height: 20px;
-}
-header span {
+header .logo-name {
+  width: 100%;
   display: flex;
+  flex-direction: column;
   font-size: 23px;
   margin: auto;
-  text-align: center;
   align-items: center;
+  flex-basis: 60%;
 }
 header .content {
   display: flex;
   flex-direction: column;
   justify-content: end;
+  flex-basis: 20%;
 }
 .control-box {
   display: flex;
@@ -184,38 +189,8 @@ footer {
 .checked * {
   color: var(--color-gray);
 }
-/* 테블릿 가로, 테블릿 세로 (해상도 768px ~ 910px)*/
-@media all and (min-width: 768px) and (max-width: 910px) {
-  #box {
-    width: 100%;
-    margin: 0;
-    height: 100%;
-  }
-  header {
-    height: 14vh;
-  }
-  ul {
-    height: 68vh;
-  }
-  footer {
-    height: 18vh;
-    flex-grow: 3;
-  }
-  .check-btn,
-  .remove-btn {
-    width: 100px;
-  }
-  .input-text {
-    height: 8vh;
-  }
-  .submit-box {
-    height: 10vh;
-  }
-  .submit-box .submit-btn {
-    margin-top: 1vh;
-  }
-} /* 모바일 가로, 모바일 세로 (해상도 480px ~ 767px)*/
-@media all and (min-width: 480px) and (max-width: 767px) {
+/* 모바일 가로, 모바일 세로 (해상도 480px ~ 600px)*/
+@media all and (min-width: 480px) and (max-width: 550px) {
   #box {
     width: 100%;
     margin: 0;
