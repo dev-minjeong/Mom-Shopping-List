@@ -178,8 +178,9 @@ footer {
   font-size: 40px;
   font-weight: lighter;
   color: black;
-  border-radius: 50%;
+  border-radius: 8vh;
   transition: all 300ms ease-in;
+  margin: auto;
 }
 
 .checked {
